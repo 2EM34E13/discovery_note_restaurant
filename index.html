@@ -14,8 +14,7 @@
 
     <h1>网红餐厅探店笔记（软文）生成器</h1>
     <input type="text" id = "xx" placeholder ="今天去哪吃:">  
-    <button id = "btn">探店
-    <button id = "test">2  
+    <button id = "btn">探店 
     <span id="output"></span>
 
 <!--input/output-->
@@ -27,10 +26,9 @@
 
 
         def show(e):
-            document['output'] <= output_text
+            document['output'].text = output_text
             alert('a')
-            document['output'] <= 'a'
-            document <= "Hello !"
+
 
         document['text'].bind('input',show_text)
         document['btn'].bind('click',show)  
