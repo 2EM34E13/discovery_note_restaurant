@@ -1,18 +1,109 @@
 <html>
+
 <head>
-<script src="/brython.js"></script>
+    <meta charset="utf-8">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.10.0/brython.min.js">
+    </script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.10.0/brython_stdlib.js">
+    </script>
 </head>
+
 <body onload="brython()">
-<script type="text/python">
 
-from browser import alert, document
-# document['entry'] is the input field
-alert(document['entry'].value)
+    <h1>网红餐厅探店笔记（软文）生成器</h1>
+    <input type="text" id = "xx" placeholder ="今天去哪吃:">  
+    <button id = "btn">探店    
+    <span id="output"></span>
+
+<!--input/output-->
+    <script type ="text/python" id="script0">
+        from browser import document,alert
+        import random
+        import json 
+        
+
+        def show(e):
+            document['output'] <= output_text
+            alert(document['output'])
+
+        document['text'].bind('input',show_text)
+        document['btn'].bind('click',show)  
+        data = json.load(open("pack.json", encoding="utf-8"))
+        重复度 = 1
+
+        output_text=''
+
+        def generator_1(trans,xx):
+            global output_text
+            body = random.choice(data[trans])
+            body += "\n\n"
+            body = body.replace("place", xx)
+            output_text += body
+            return ()
+
+        def generator_1_and(trans,xx):
+            global output_text
+            body = random.choice(data[trans])
+            body = body.replace("place", xx)  
+            output_text += body
+            return ()
+
+        def 洗牌遍历(列表):
+            global 重复度
+            池 = list(列表) * 重复度
+            while True:
+                random.shuffle(池)
+                for 元素 in 池:
+                    yield 元素
+                    
+        nxa = 洗牌遍历(data['surrounding_atmosphere'])
+        nfl = 洗牌遍历(data['food_list'])            
+
+        def generator_2(null,xx):
+            tmp = ""
+            global output_text
+            for x in xx:
+                tmp = ""
+                tmp = str()
+                while ( len(tmp) < 130 ) :
+                        tmp += next(null)
+                        tmp += "\n"
+                tmp = tmp.replace("place",xx)
+            tmp += "\n\n"
+            output_text += tmp
+            return()
+
+        if __name__ == '__main__':
+
+            xx=input('今天去哪吃:')
+            generator_1("summary",xx)
+            generator_1("reason",xx)
+            output_text +="🏡环境\n"
+            generator_1_and("surrounding_type",xx)
+            generator_2(nxa,xx)
+            output_text +="🍸推荐必点\n"
+            generator_1_and("food",xx)
+            generator_2(nfl,xx)
+            generator_1("tip",xx)
+            print(output_text)
 
 
-document["echo"].bind("click", click)</script>
-<input id="zone">
-<button id="echo">click !</button>
-    
+    </script>
+
+
+<!--btn-->
+
+    <script type ="text/python" id="script1">
+
+        from browser import document,console,alert
+        
+        def show(e):
+            alert(document['input'])
+            document['hello'] <= 'hello world3'
+        document['btn'].bind('click',show)   
+    </script>
 </body>
+
 </html>
